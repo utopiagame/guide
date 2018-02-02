@@ -1,0 +1,41 @@
+// =============================================================================
+// MIXINS
+// =============================================================================
+
+// Clearfix
+@mixin group {zoom:1;
+	&:before, &:after {content:'';display:table;position:relative;}
+	&:after {clear:both}
+}
+
+// VENDOR PREFIXES
+@mixin vendor($attribute, $value) {
+	-ms-#{$attribute}: $value;
+	-o-#{$attribute}: $value;
+	-moz-#{$attribute}: $value;
+	-webkit-#{$attribute}: $value;
+	#{$attribute}: $value;
+}
+
+// Full browser width bars
+// Note - Add to CSS: html, body {overflow-x:hidden;}
+// @mixing full-browser-width-bars($background:#000) {background:$background; position:relative;
+// 	&:before, &:after {background:$background; content:""; position:absolute; top:0; bottom:0; width:9999px;}
+// 	&:before {right:100%;}
+// 	&:after {left:100%;}
+// }
+
+@mixin breakpoint($point) {
+	@if $point == mobile {
+		@media only screen and (max-width: 767px) { @content; }
+	}
+	@else if $point == tablet {
+		@media only screen and (max-width : 1024px) { @content; }
+	}
+	@else if $point == laptop {
+		@media only screen and (max-width : 1400px) { @content; }
+	}
+	@else if $point == desktop {
+		@media only screen and (min-width : 1400px) { @content; }
+	}
+}
